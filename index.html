@@ -1,0 +1,2910 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LinguaVibe — Онлайн-школа английского языка нового поколения</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================================
+       1. VARIABLES & RESET
+       ======================================================== */
+    :root {
+      /* Soft pink & sky-blue color palette */
+      --pink-primary: #ff5b7f;
+      --pink-hover: #e6456a;
+      --pink-soft: #ffb8c6;
+      --pink-light: #fff0f3;
+      --pink-glow: rgba(255, 91, 127, 0.25);
+
+      --blue-primary: #0284c7;
+      --blue-sky: #38bdf8;
+      --blue-soft: #bae6fd;
+      --blue-light: #f0f9ff;
+      --blue-glow: rgba(56, 189, 248, 0.25);
+
+      --grad-main: linear-gradient(135deg, #ff5b7f 0%, #38bdf8 100%);
+      --grad-hero: linear-gradient(135deg, #ffeef2 0%, #e0f2fe 50%, #ffffff 100%);
+      --grad-card: linear-gradient(145deg, #ffffff 0%, #fdf8fa 100%);
+
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --text-sub: #334155;
+      
+      --bg-body: #f8fafc;
+      --bg-white: #ffffff;
+      --border-subtle: #e2e8f0;
+      --border-colored: #ffd5de;
+
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 10px 25px -5px rgba(2, 132, 199, 0.08), 0 8px 16px -6px rgba(255, 91, 127, 0.06);
+      --shadow-lg: 0 20px 35px -10px rgba(2, 132, 199, 0.12), 0 10px 20px -8px rgba(255, 91, 127, 0.1);
+      --shadow-glow: 0 12px 30px rgba(255, 91, 127, 0.28);
+
+      --font-heading: 'Outfit', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Ambient decorative gradients */
+    .bg-blobs {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(85px);
+      opacity: 0.55;
+      animation: floatSlow 18s ease-in-out infinite alternate;
+    }
+    .blob-1 {
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, #ffd4dc 0%, transparent 70%);
+      top: -120px;
+      left: -100px;
+    }
+    .blob-2 {
+      width: 520px;
+      height: 520px;
+      background: radial-gradient(circle, #bae6fd 0%, transparent 70%);
+      top: 30%;
+      right: -150px;
+      animation-delay: -5s;
+    }
+    .blob-3 {
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, #ffe4e6 0%, transparent 70%);
+      bottom: 10%;
+      left: 10%;
+      animation-delay: -9s;
+    }
+    @keyframes floatSlow {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 30px) scale(1.08); }
+    }
+
+    .container {
+      width: 92%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ========================================================
+       2. NAVIGATION
+       ======================================================== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background: rgba(255, 255, 255, 0.85);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+      transition: var(--transition);
+    }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.55rem;
+      letter-spacing: -0.02em;
+      color: var(--text-main);
+    }
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--grad-main);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 12px var(--pink-glow);
+    }
+    .logo-gradient {
+      background: var(--grad-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-link {
+      text-decoration: none;
+      color: var(--text-sub);
+      font-weight: 500;
+      font-size: 0.95rem;
+      position: relative;
+      transition: var(--transition);
+    }
+    .nav-link:hover {
+      color: var(--pink-primary);
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--grad-main);
+      transition: width 0.25s ease;
+      border-radius: 2px;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: var(--transition);
+    }
+    .btn-gradient {
+      background: var(--grad-main);
+      color: #ffffff;
+      box-shadow: 0 6px 18px var(--pink-glow);
+    }
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(255, 91, 127, 0.35);
+    }
+    .btn-outline {
+      background: #ffffff;
+      color: var(--blue-primary);
+      border: 1.5px solid var(--blue-sky);
+    }
+    .btn-outline:hover {
+      background: var(--blue-light);
+      transform: translateY(-2px);
+    }
+    .btn-sm {
+      padding: 0.55rem 1.15rem;
+      font-size: 0.85rem;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      cursor: pointer;
+      color: var(--text-main);
+    }
+
+    /* ========================================================
+       3. HERO SECTION
+       ======================================================== */
+    .hero {
+      padding: 5rem 0 4rem;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: #ffffff;
+      border: 1px solid var(--border-colored);
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--pink-primary);
+    }
+    .hero-badge .sparkle {
+      font-size: 1rem;
+    }
+    .hero-title {
+      font-family: var(--font-heading);
+      font-size: 3.25rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.35rem;
+    }
+    .hero-highlight {
+      background: var(--grad-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 2.25rem;
+      max-width: 540px;
+    }
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid rgba(226, 232, 240, 0.9);
+    }
+    .stat-item h4 {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text-main);
+      line-height: 1.1;
+    }
+    .stat-item p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Hero interactive card mockup */
+    .hero-visual {
+      position: relative;
+    }
+    .hero-card-preview {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 184, 198, 0.4);
+      position: relative;
+      z-index: 2;
+    }
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .preview-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .preview-badge {
+      background: var(--pink-light);
+      color: var(--pink-primary);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .preview-row {
+      background: var(--blue-light);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .preview-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue-primary);
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .preview-code {
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .floating-chip {
+      position: absolute;
+      background: #ffffff;
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-full);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      z-index: 3;
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      animation: floatChip 6s ease-in-out infinite alternate;
+    }
+    .chip-1 {
+      top: -15px;
+      right: -20px;
+    }
+    .chip-2 {
+      bottom: -20px;
+      left: -15px;
+      animation-delay: -3s;
+    }
+    @keyframes floatChip {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-12px); }
+    }
+
+    /* ========================================================
+       4. SECTION HEADINGS & COMMONS
+       ======================================================== */
+    .section-wrap {
+      padding: 5.5rem 0;
+      position: relative;
+    }
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 3.5rem;
+    }
+    .section-tag {
+      display: inline-block;
+      padding: 0.35rem 0.95rem;
+      background: var(--pink-light);
+      color: var(--pink-primary);
+      border-radius: var(--radius-full);
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: 2.45rem;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.85rem;
+    }
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    /* ========================================================
+       5. GRAMMAR GUIDE SECTION (INTERACTIVE ACCORDIONS)
+       ======================================================== */
+    .grammar-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2.25rem;
+    }
+    .category-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+    .pill-btn {
+      padding: 0.55rem 1.2rem;
+      border-radius: var(--radius-full);
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-sub);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .pill-btn:hover {
+      border-color: var(--pink-soft);
+      color: var(--pink-primary);
+    }
+    .pill-btn.active {
+      background: var(--grad-main);
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 14px var(--pink-glow);
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 260px;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.4rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-input:focus {
+      border-color: var(--blue-sky);
+      box-shadow: 0 0 0 3px var(--blue-glow);
+    }
+    .search-icon {
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Grammar Accordion Grid */
+    .grammar-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.15rem;
+    }
+    .grammar-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .grammar-card:hover {
+      border-color: rgba(255, 91, 127, 0.4);
+      box-shadow: var(--shadow-md);
+    }
+    .grammar-card.open {
+      border-color: var(--pink-soft);
+      box-shadow: var(--shadow-md);
+    }
+
+    .grammar-header {
+      padding: 1.25rem 1.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      user-select: none;
+      background: #ffffff;
+      transition: background 0.2s;
+    }
+    .grammar-card.open .grammar-header {
+      background: linear-gradient(90deg, #fffafb 0%, #f7fcff 100%);
+    }
+
+    .grammar-header-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .tense-tag {
+      padding: 0.25rem 0.75rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .tag-present { background: #ffe4e6; color: #e11d48; }
+    .tag-past { background: #e0e7ff; color: #4338ca; }
+    .tag-future { background: #e0f2fe; color: #0284c7; }
+    .tag-conditional { background: #fef3c7; color: #d97706; }
+
+    .tense-title-wrap h3 {
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .tense-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .grammar-header-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    .quick-formula {
+      font-family: monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--blue-primary);
+      background: var(--blue-light);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-sm);
+      display: inline-block;
+    }
+    .chevron-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--text-sub);
+      transition: transform 0.3s ease;
+    }
+    .grammar-card.open .chevron-icon {
+      transform: rotate(180deg);
+      background: var(--pink-light);
+      color: var(--pink-primary);
+    }
+
+    /* Accordion Body */
+    .grammar-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0, 1, 0, 1);
+      border-top: 1px solid transparent;
+    }
+    .grammar-card.open .grammar-body {
+      max-height: 1200px;
+      transition: max-height 0.5s ease-in-out;
+      border-top-color: var(--border-subtle);
+    }
+    .grammar-content {
+      padding: 1.65rem;
+      background: #fafcff;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+      gap: 1.35rem;
+    }
+
+    .detail-box {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .detail-box-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-main);
+    }
+    .detail-box-title.accent-pink { color: var(--pink-primary); }
+    .detail-box-title.accent-blue { color: var(--blue-primary); }
+    .detail-box-title.accent-warn { color: #d97706; }
+
+    .formula-row {
+      margin-bottom: 0.5rem;
+      font-size: 0.88rem;
+    }
+    .formula-type {
+      display: inline-block;
+      width: 22px;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .formula-code {
+      font-family: monospace;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f1f5f9;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+    }
+
+    .marker-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .marker-tag {
+      background: var(--blue-light);
+      color: var(--blue-primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .example-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+    .example-item {
+      font-size: 0.9rem;
+      position: relative;
+      padding-left: 1rem;
+    }
+    .example-item::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--pink-primary);
+      font-weight: bold;
+    }
+    .example-en {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .example-ru {
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      display: block;
+    }
+
+    .warning-box {
+      grid-column: 1 / -1;
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 1rem 1.25rem;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-size: 0.88rem;
+      color: #92400e;
+    }
+
+    /* ========================================================
+       6. TESTS & KNOWLEDGE CHECK SECTION
+       ======================================================== */
+    .tests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .test-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-subtle);
+      position: relative;
+    }
+    .test-badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .badge-pink { background: var(--pink-light); color: var(--pink-primary); }
+    .badge-blue { background: var(--blue-light); color: var(--blue-primary); }
+
+    .test-card-title {
+      font-family: var(--font-heading);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .test-card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #f1f5f9;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--grad-main);
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: var(--radius-full);
+    }
+
+    /* Quiz components */
+    .question-box {
+      margin-bottom: 1.5rem;
+    }
+    .question-number {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-bottom: 0.35rem;
+    }
+    .question-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-bottom: 1.5rem;
+    }
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      padding: 0.9rem 1.2rem;
+      background: #ffffff;
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-sub);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+    .option-btn:hover:not(:disabled) {
+      border-color: var(--blue-sky);
+      background: var(--blue-light);
+    }
+    .option-btn.selected {
+      border-color: var(--blue-primary);
+      background: var(--blue-light);
+    }
+    .option-btn.correct {
+      background: #ecfdf5 !important;
+      border-color: #10b981 !important;
+      color: #065f46 !important;
+    }
+    .option-btn.incorrect {
+      background: #fef2f2 !important;
+      border-color: #ef4444 !important;
+      color: #991b1b !important;
+    }
+
+    .feedback-box {
+      display: none;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      animation: fadeIn 0.3s ease;
+    }
+    .feedback-box.show { display: block; }
+    .feedback-box.success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .feedback-box.error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+
+    /* Result Modal / Box */
+    .result-container {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+      animation: fadeIn 0.4s ease;
+    }
+    .result-level-badge {
+      display: inline-block;
+      font-family: var(--font-heading);
+      font-size: 2.2rem;
+      font-weight: 800;
+      background: var(--grad-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .result-level-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .result-level-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      max-width: 420px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================================
+       7. LEAD CAPTURE FORM SECTION
+       ======================================================== */
+    .lead-section {
+      background: linear-gradient(145deg, #fff2f5 0%, #eef7ff 100%);
+      border-radius: var(--radius-lg);
+      padding: 4rem 3rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid rgba(255, 184, 198, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .lead-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+    .lead-info h2 {
+      font-family: var(--font-heading);
+      font-size: 2.35rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .lead-info p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+    .lead-perks {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .perk-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .perk-check {
+      width: 24px;
+      height: 24px;
+      background: var(--pink-primary);
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    /* Form styling */
+    .lead-form-wrap {
+      background: #ffffff;
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border-subtle);
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 0.45rem;
+    }
+    .form-input, .form-select {
+      width: 100%;
+      padding: 0.85rem 1.15rem;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border-subtle);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-main);
+      outline: none;
+      background: #fdfefe;
+      transition: var(--transition);
+    }
+    .form-input:focus, .form-select:focus {
+      border-color: var(--pink-primary);
+      box-shadow: 0 0 0 3px var(--pink-glow);
+    }
+    .form-input.error, .form-select.error {
+      border-color: #ef4444;
+      background: #fff8f8;
+    }
+    .error-hint {
+      color: #ef4444;
+      font-size: 0.8rem;
+      margin-top: 0.3rem;
+      display: none;
+    }
+    .form-agreement {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      text-align: center;
+    }
+
+    /* ========================================================
+       8. SUCCESS MODAL
+       ======================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.5);
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-box {
+      background: #ffffff;
+      width: 90%;
+      max-width: 480px;
+      border-radius: var(--radius-lg);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.92);
+      transition: var(--transition);
+      position: relative;
+    }
+    .modal-overlay.active .modal-box {
+      transform: scale(1);
+    }
+    .modal-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      color: #16a34a;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 1.25rem;
+    }
+    .modal-title {
+      font-family: var(--font-heading);
+      font-size: 1.65rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    .modal-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-close-btn {
+      position: absolute;
+      top: 1.25rem;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* ========================================================
+       9. FOOTER
+       ======================================================== */
+    .footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border-subtle);
+      padding: 3.5rem 0 2rem;
+      margin-top: 5rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+    .footer-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-top: 0.75rem;
+      max-width: 320px;
+    }
+    .footer-col h5 {
+      font-family: var(--font-heading);
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+    .footer-link:hover {
+      color: var(--pink-primary);
+    }
+    .footer-bottom {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* ========================================================
+       10. RESPONSIVE DESIGN
+       ======================================================== */
+    @media (max-width: 992px) {
+      .hero-grid, .lead-grid, .tests-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.75rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .hero-visual {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        flex-direction: column;
+        padding: 1.5rem;
+        border-bottom: 1px solid var(--border-subtle);
+        box-shadow: var(--shadow-md);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .mobile-menu-btn {
+        display: block;
+      }
+      .hero {
+        padding: 3rem 0;
+      }
+      .hero-title {
+        font-size: 2.15rem;
+      }
+      .section-title {
+        font-size: 1.95rem;
+      }
+      .grammar-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        width: 100%;
+      }
+      .grammar-header-right .quick-formula {
+        display: none;
+      }
+      .lead-section {
+        padding: 2.5rem 1.5rem;
+      }
+      .lead-form-wrap {
+        padding: 1.75rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient glowing gradient blobs -->
+  <div class="bg-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">⚡</div>
+        <span>Lingua<span class="logo-gradient">Vibe</span></span>
+      </a>
+
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Меню">&#9776;</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#grammar" class="nav-link">Справочник грамматики</a></li>
+        <li><a href="#mini-quiz" class="nav-link">Мини-тренажёр</a></li>
+        <li><a href="#level-test" class="nav-link">Тест уровня</a></li>
+        <li><a href="#apply" class="btn btn-gradient btn-sm">Пробный урок</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text-wrap">
+          <div class="hero-badge">
+            <span class="sparkle">✨</span>
+            <span>Инновационная онлайн-школа английского</span>
+          </div>
+          <h1 class="hero-title">
+            Освой английский от базы до совершенства с <span class="hero-highlight">комфортом и удовольствием</span>
+          </h1>
+          <p class="hero-desc">
+            Никакой нудной зубрежки. Интерактивная грамматика всех времен, моментальные тесты, практический разговорный опыт и персональный трек обучения.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#grammar" class="btn btn-gradient">
+              <span>Справочник времен и правил</span>
+              <span>↓</span>
+            </a>
+            <a href="#level-test" class="btn btn-outline">
+              <span>Пройти тест уровня (A1–C2)</span>
+            </a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h4>15 000+</h4>
+              <p>Учеников говорят свободно</p>
+            </div>
+            <div class="stat-item">
+              <h4>98%</h4>
+              <p>Сдают экзамены на высокий балл</p>
+            </div>
+            <div class="stat-item">
+              <h4>17 правил</h4>
+              <p>Все времена и условные формы</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="floating-chip chip-1">
+            <span>🎯</span>
+            <div>
+              <div style="font-size:0.75rem; color:#64748b;">Прогресс темы</div>
+              <div>Past Perfect усвоен!</div>
+            </div>
+          </div>
+
+          <div class="hero-card-preview">
+            <div class="preview-header">
+              <div class="preview-title">
+                <span>📚</span>
+                <span>Карточка урока</span>
+              </div>
+              <span class="preview-badge">Все 12 времен + Conditionals</span>
+            </div>
+
+            <div class="preview-row">
+              <div class="preview-label">Present Perfect Simple</div>
+              <div class="preview-code">have / has + V3 (ed)</div>
+            </div>
+
+            <div style="font-size: 0.9rem; color: #475569; margin-bottom: 0.75rem;">
+              <strong>Пример:</strong> «I <em>have just mastered</em> English tenses!»
+            </div>
+
+            <div style="display:flex; justify-content:space-between; align-items:center; background:#fff1f2; padding:0.6rem 0.9rem; border-radius:10px; font-size:0.85rem; color:#e11d48; font-weight:600;">
+              <span>⚠️ Не путай с Past Simple!</span>
+              <span>Результат сейчас ➔</span>
+            </div>
+          </div>
+
+          <div class="floating-chip chip-2">
+            <span>🏆</span>
+            <div>
+              <div style="font-size:0.75rem; color:#64748b;">Твой уровень</div>
+              <div style="color:var(--pink-primary);">B2 Upper-Intermediate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: GRAMMAR GUIDE -->
+    <section id="grammar" class="section-wrap">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Интерактивный справочник</span>
+          <h2 class="section-title">Вся грамматика на одной странице</h2>
+          <p class="section-subtitle">
+            Все 12 времен английского языка и 5 условных наклонений (Conditionals). Нажмите на любое время, чтобы открыть формулу, маркеры, живые примеры и частые ошибки.
+          </p>
+        </div>
+
+        <!-- Controls: Category Pills & Search -->
+        <div class="grammar-controls">
+          <div class="category-pills" id="categoryPills">
+            <button class="pill-btn active" data-filter="all">Все (17)</button>
+            <button class="pill-btn" data-filter="present">Present (4)</button>
+            <button class="pill-btn" data-filter="past">Past (4)</button>
+            <button class="pill-btn" data-filter="future">Future (4)</button>
+            <button class="pill-btn" data-filter="conditionals">Conditionals (5)</button>
+          </div>
+
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="grammarSearch" class="search-input" placeholder="Поиск правила, маркера...">
+          </div>
+        </div>
+
+        <!-- Accordion Container -->
+        <div class="grammar-grid" id="grammarGrid">
+
+          <!-- 1. PRESENT SIMPLE -->
+          <div class="grammar-card" data-category="present" data-keywords="present simple простое настоящее do does always usually">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-present">Present</span>
+                <div class="tense-title-wrap">
+                  <h3>Present Simple</h3>
+                  <span class="tense-subtitle">Простое настоящее время (факты, регулярные действия)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">V1 / Vs</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">I/You/We/They + V1 | He/She/It + V-s/es</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">don't / doesn't + V1</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Do / Does + S + V1?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">always</span>
+                    <span class="marker-tag">usually</span>
+                    <span class="marker-tag">often</span>
+                    <span class="marker-tag">sometimes</span>
+                    <span class="marker-tag">rarely</span>
+                    <span class="marker-tag">never</span>
+                    <span class="marker-tag">every day / week</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">She drinks coffee every morning.</span>
+                      <span class="example-ru">Она пьет кофе каждое утро.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">They don't live in London.</span>
+                      <span class="example-ru">Они не живут в Лондоне.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">Do you speak English fluently?</span>
+                      <span class="example-ru">Ты свободно говоришь по-английски?</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Забывать окончание <code>-s/-es</code> для 3-го лица (He/She/It). Говорите: <em>«He speaks»</em>, а не <em>«He speak»</em>. В отрицании и вопросе <code>-s</code> уходит к вспомогательному глаголу: <em>«Does he speak?»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. PRESENT CONTINUOUS -->
+          <div class="grammar-card" data-category="present" data-keywords="present continuous настоящее длительное am is are ing now right now">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-present">Present</span>
+                <div class="tense-title-wrap">
+                  <h3>Present Continuous</h3>
+                  <span class="tense-subtitle">Настоящее длительное время (действие прямо сейчас или временная ситуация)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">am / is / are + V-ing</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + am/is/are + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + am/is/are not + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Am/Is/Are + S + V-ing?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">now</span>
+                    <span class="marker-tag">right now</span>
+                    <span class="marker-tag">at the moment</span>
+                    <span class="marker-tag">currently</span>
+                    <span class="marker-tag">these days</span>
+                    <span class="marker-tag">Listen! / Look!</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">I am learning English right now.</span>
+                      <span class="example-ru">Я учу английский прямо сейчас.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">He isn't working today.</span>
+                      <span class="example-ru">Он сегодня не работает.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">Are you listening to me?</span>
+                      <span class="example-ru">Ты меня слушаешь?</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использование глаголов состояния (Stative verbs: <em>know, like, want, understand, believe</em>) во времени Continuous. Правильно: <em>«I understand you»</em>, а не <em>«I am understanding you»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. PRESENT PERFECT -->
+          <div class="grammar-card" data-category="present" data-keywords="present perfect настоящее совершенное have has v3 already yet just ever never">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-present">Present</span>
+                <div class="tense-title-wrap">
+                  <h3>Present Perfect</h3>
+                  <span class="tense-subtitle">Настоящее совершенное (опыт или результат прошлого, важный сейчас)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">have / has + V3(ed)</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">I/You/We/They have + V3 | He/She/It has + V3</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">haven't / hasn't + V3</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Have / Has + S + V3?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">already</span>
+                    <span class="marker-tag">yet</span>
+                    <span class="marker-tag">just</span>
+                    <span class="marker-tag">ever</span>
+                    <span class="marker-tag">never</span>
+                    <span class="marker-tag">since</span>
+                    <span class="marker-tag">for</span>
+                    <span class="marker-tag">recently</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">I have already finished my homework.</span>
+                      <span class="example-ru">Я уже закончил домашнее задание (результат налицо).</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">Have you ever been to London?</span>
+                      <span class="example-ru">Ты когда-нибудь бывал в Лондоне? (жизненный опыт).</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">She hasn't called me yet.</span>
+                      <span class="example-ru">Она мне ещё не звонила.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использование Present Perfect с точным временем в прошлом (<em>yesterday, last year, in 2021</em>). С конкретным моментом всегда нужен Past Simple: <em>«I visited London last year»</em> (НЕ «have visited»).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. PRESENT PERFECT CONTINUOUS -->
+          <div class="grammar-card" data-category="present" data-keywords="present perfect continuous have been ing длительное действие">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-present">Present</span>
+                <div class="tense-title-wrap">
+                  <h3>Present Perfect Continuous</h3>
+                  <span class="tense-subtitle">Действие началось в прошлом и длится до сих пор</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">have/has been + V-ing</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + have/has been + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + haven't/hasn't been + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Have/Has + S + been + V-ing?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">for 2 hours</span>
+                    <span class="marker-tag">since morning</span>
+                    <span class="marker-tag">all day</span>
+                    <span class="marker-tag">how long</span>
+                    <span class="marker-tag">lately</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">It has been raining for three hours.</span>
+                      <span class="example-ru">Дождь идет уже три часа без остановки.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">How long have you been studying English?</span>
+                      <span class="example-ru">Как долго ты уже учишь английский?</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Путаница между процессом (PPC) и результатом/количеством (PP). Если называете число: <em>«I have sent 5 emails»</em> (НЕ «have been sending 5 emails»).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. PAST SIMPLE -->
+          <div class="grammar-card" data-category="past" data-keywords="past simple прошедшее простое did v2 ed yesterday ago">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-past">Past</span>
+                <div class="tense-title-wrap">
+                  <h3>Past Simple</h3>
+                  <span class="tense-subtitle">Простое прошедшее время (завершенное действие в определенное время)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">V2 / Ved (did)</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + V2 / V-ed</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + didn't + V1</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Did + S + V1?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">yesterday</span>
+                    <span class="marker-tag">last night/year</span>
+                    <span class="marker-tag">2 days ago</span>
+                    <span class="marker-tag">in 2018</span>
+                    <span class="marker-tag">when I was a child</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">We visited Rome last summer.</span>
+                      <span class="example-ru">Мы посетили Рим прошлым летом.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">I didn't see him at the party.</span>
+                      <span class="example-ru">Я не видел его на вечеринке.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">Did you buy the tickets?</span>
+                      <span class="example-ru">Ты купил билеты?</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использование 2-й формы глагола после <code>didn't</code> или <code>did</code>. Правильно: <em>«Did you see?»</em> (НЕ «Did you saw?»); <em>«I didn't go»</em> (НЕ «didn't went»).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 6. PAST CONTINUOUS -->
+          <div class="grammar-card" data-category="past" data-keywords="past continuous прошедшее длительное was were ing while when">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-past">Past</span>
+                <div class="tense-title-wrap">
+                  <h3>Past Continuous</h3>
+                  <span class="tense-subtitle">Длительное действие в конкретный момент в прошлом</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">was / were + V-ing</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">I/He/She/It was | You/We/They were + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">wasn't / weren't + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Was / Were + S + V-ing?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">at 7 PM yesterday</span>
+                    <span class="marker-tag">all evening</span>
+                    <span class="marker-tag">while</span>
+                    <span class="marker-tag">when</span>
+                    <span class="marker-tag">from 5 to 7</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">I was watching TV when the phone rang.</span>
+                      <span class="example-ru">Я смотрел ТВ (процесс), когда зазвонил телефон (короткое действие).</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">What were you doing at 10 PM?</span>
+                      <span class="example-ru">Что ты делал вчера в 10 вечера?</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Путаница между <code>was</code> (I, he, she, it) и <code>were</code> (you, we, they). В английском <em>You</em> всегда согласуется с <em>were</em>: «You were sleeping».
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. PAST PERFECT -->
+          <div class="grammar-card" data-category="past" data-keywords="past perfect предпрошедшее had v3 by the time before">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-past">Past</span>
+                <div class="tense-title-wrap">
+                  <h3>Past Perfect</h3>
+                  <span class="tense-subtitle">«Предпрошедшее» действие (произошло раньше другого события в прошлом)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">had + V3(ed)</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + had + V3 / V-ed</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + hadn't + V3</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Had + S + V3?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">by 5 PM</span>
+                    <span class="marker-tag">before</span>
+                    <span class="marker-tag">after</span>
+                    <span class="marker-tag">by the time</span>
+                    <span class="marker-tag">already</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">When we arrived, the movie had already started.</span>
+                      <span class="example-ru">Когда мы приехали, фильм уже начался (раньше приезда).</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">She had never seen snow before she visited Norway.</span>
+                      <span class="example-ru">Она никогда не видела снег до поездки в Норвегию.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использовать Past Perfect без точки отсчета в прошлом. Если действия идут просто по порядку (пришел, сел, поел) — везде ставится обычный Past Simple.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 8. PAST PERFECT CONTINUOUS -->
+          <div class="grammar-card" data-category="past" data-keywords="past perfect continuous had been ing">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-past">Past</span>
+                <div class="tense-title-wrap">
+                  <h3>Past Perfect Continuous</h3>
+                  <span class="tense-subtitle">Длительное действие, происходившее до определенного момента в прошлом</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">had been + V-ing</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + had been + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + hadn't been + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Had + S + been + V-ing?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">for hours before</span>
+                    <span class="marker-tag">since</span>
+                    <span class="marker-tag">how long</span>
+                    <span class="marker-tag">until</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">He was tired because he had been driving all night.</span>
+                      <span class="example-ru">Он был уставшим, потому что вел машину всю ночь до этого.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Забывать глагол <code>been</code>. Формула строго требует <em>had + been + V-ing</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 9. FUTURE SIMPLE -->
+          <div class="grammar-card" data-category="future" data-keywords="future simple будущее простое will won't tomorrow">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-future">Future</span>
+                <div class="tense-title-wrap">
+                  <h3>Future Simple</h3>
+                  <span class="tense-subtitle">Простое будущее (спонтанные решения, обещания, прогнозы)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">will + V1</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + will + V1</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + won't (will not) + V1</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Will + S + V1?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">tomorrow</span>
+                    <span class="marker-tag">next week/month</span>
+                    <span class="marker-tag">soon</span>
+                    <span class="marker-tag">in 3 days</span>
+                    <span class="marker-tag">I think / probably</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">I will call you back in five minutes.</span>
+                      <span class="example-ru">Я перезвоню тебе через 5 минут (спонтанное решение).</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">It will probably rain tomorrow.</span>
+                      <span class="example-ru">Завтра, вероятно, пойдет дождь.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использовать <code>will</code> в придаточных условия и времени после <em>if / when / as soon as</em>. Правильно: <em>«When I arrive, I will call you»</em> (НЕ «When I will arrive»).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 10. FUTURE CONTINUOUS -->
+          <div class="grammar-card" data-category="future" data-keywords="future continuous будущее длительное will be ing">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-future">Future</span>
+                <div class="tense-title-wrap">
+                  <h3>Future Continuous</h3>
+                  <span class="tense-subtitle">Длительное действие в определенный момент в будущем</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">will be + V-ing</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + will be + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + won't be + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Will + S + be + V-ing?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">this time tomorrow</span>
+                    <span class="marker-tag">at 5 PM next Friday</span>
+                    <span class="marker-tag">all day tomorrow</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">This time tomorrow I will be flying to London.</span>
+                      <span class="example-ru">В это время завтра я буду лететь в Лондон.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Забывать <code>be</code>: «I will working» ➔ неверно. Всегда: <em>«I will be working»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 11. FUTURE PERFECT -->
+          <div class="grammar-card" data-category="future" data-keywords="future perfect будущее совершенное will have v3 by tomorrow">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-future">Future</span>
+                <div class="tense-title-wrap">
+                  <h3>Future Perfect</h3>
+                  <span class="tense-subtitle">Действие будет полностью завершено к определенному моменту в будущем</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">will have + V3(ed)</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + will have + V3</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + won't have + V3</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Will + S + have + V3?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">by 6 o'clock</span>
+                    <span class="marker-tag">by tomorrow</span>
+                    <span class="marker-tag">by next year</span>
+                    <span class="marker-tag">by the time...</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">By Friday, I will have finished this project.</span>
+                      <span class="example-ru">К пятнице я уже завершу этот проект.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использовать <em>has</em> с He/She/It в этой конструкции. В Future Perfect ВСЕГДА стоит начальная форма: <em>«He will have done»</em> (НЕ «will has»).
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 12. FUTURE PERFECT CONTINUOUS -->
+          <div class="grammar-card" data-category="future" data-keywords="future perfect continuous will have been ing">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-future">Future</span>
+                <div class="tense-title-wrap">
+                  <h3>Future Perfect Continuous</h3>
+                  <span class="tense-subtitle">Действие будет длиться уже определенный период к моменту в будущем</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">will have been + V-ing</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Формула построения</div>
+                  <div class="formula-row"><span class="formula-type">+</span> <span class="formula-code">S + will have been + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">-</span> <span class="formula-code">S + won't have been + V-ing</span></div>
+                  <div class="formula-row"><span class="formula-type">?</span> <span class="formula-code">Will + S + have been + V-ing?</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">for ... by next year</span>
+                    <span class="marker-tag">by December</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">Next month, we will have been living here for 5 years.</span>
+                      <span class="example-ru">В следующем месяце исполнится ровно 5 лет, как мы здесь живем.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Лайфхак:</strong> Это самое редкое время в разговорной речи, но его обожают составители экзаменов IELTS и TOEFL!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 13. ZERO CONDITIONAL -->
+          <div class="grammar-card" data-category="conditionals" data-keywords="zero conditional нулевой тип условные факты законы природы">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-conditional">Conditionals</span>
+                <div class="tense-title-wrap">
+                  <h3>Zero Conditional (Нулевой тип)</h3>
+                  <span class="tense-subtitle">Неопровержимые факты, законы природы, 100% истины</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">If + Present, Present</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Схема условия</div>
+                  <div class="formula-row"><span class="formula-type">If</span> <span class="formula-code">Present Simple,</span></div>
+                  <div class="formula-row"><span class="formula-type">➔</span> <span class="formula-code">Present Simple</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры / Союзы</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">if (если)</span>
+                    <span class="marker-tag">when (когда)</span>
+                    <span class="marker-tag">whenever (всякий раз когда)</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">If you heat ice, it melts.</span>
+                      <span class="example-ru">Если нагревать лед, он тает (закон физики).</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">If I don't sleep well, I feel tired.</span>
+                      <span class="example-ru">Если я плохо сплю, я чувствую усталость.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Использовать <em>will</em> в главной части для законов природы: НЕ «it will melt», а строго <em>«it melts»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 14. FIRST CONDITIONAL -->
+          <div class="grammar-card" data-category="conditionals" data-keywords="first conditional первый тип реальное будущее will">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-conditional">Conditionals</span>
+                <div class="tense-title-wrap">
+                  <h3>First Conditional (Первый тип)</h3>
+                  <span class="tense-subtitle">Реальные условия в будущем (высокая вероятность)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">If + Present, will + V1</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Схема условия</div>
+                  <div class="formula-row"><span class="formula-type">If</span> <span class="formula-code">Present Simple,</span></div>
+                  <div class="formula-row"><span class="formula-type">➔</span> <span class="formula-code">will + V1</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры / Союзы</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">if</span>
+                    <span class="marker-tag">unless (если не)</span>
+                    <span class="marker-tag">as soon as</span>
+                    <span class="marker-tag">provided that</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">If it rains tomorrow, we will stay at home.</span>
+                      <span class="example-ru">Если завтра пойдет дождь, мы останемся дома.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">Unless you study, you won't pass the exam.</span>
+                      <span class="example-ru">Если ты не будешь учиться, ты не сдашь экзамен.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Ставить <em>will</em> в часть с <em>If</em>! Нельзя говорить <em>«If you will study»</em>. Правильно: <em>«If you study, you will pass»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 15. SECOND CONDITIONAL -->
+          <div class="grammar-card" data-category="conditionals" data-keywords="second conditional второй тип мечты нереальное настоящее were would">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-conditional">Conditionals</span>
+                <div class="tense-title-wrap">
+                  <h3>Second Conditional (Второй тип)</h3>
+                  <span class="tense-subtitle">Нереальное настоящее или будущее, гипотезы и мечты («Если бы...»)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">If + Past Simple, would + V1</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Схема условия</div>
+                  <div class="formula-row"><span class="formula-type">If</span> <span class="formula-code">Past Simple (were),</span></div>
+                  <div class="formula-row"><span class="formula-type">➔</span> <span class="formula-code">would / could / might + V1</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Ключевые паттерны</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">If I were you...</span>
+                    <span class="marker-tag">Imagine if...</span>
+                    <span class="marker-tag">what if...</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">If I had a million dollars, I would travel the world.</span>
+                      <span class="example-ru">Если бы у меня был миллион долларов (сейчас нет), я бы объехал мир.</span>
+                    </li>
+                    <li class="example-item">
+                      <span class="example-en">If I were you, I would take that course.</span>
+                      <span class="example-ru">На твоем месте я бы записался на этот курс.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Для всех местоимений в сослагательном наклонении предпочтительна форма <code>were</code>, а не <code>was</code>: <em>«If I were you»</em>, <em>«If he were here»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16. THIRD CONDITIONAL -->
+          <div class="grammar-card" data-category="conditionals" data-keywords="third conditional третий тип нереальное прошлое сожаления had v3 would have">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-conditional">Conditionals</span>
+                <div class="tense-title-wrap">
+                  <h3>Third Conditional (Третий тип)</h3>
+                  <span class="tense-subtitle">Нереальное прошлое (сожаления о том, что уже нельзя изменить)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">If + Past Perfect, would have + V3</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Схема условия</div>
+                  <div class="formula-row"><span class="formula-type">If</span> <span class="formula-code">had + V3 (Past Perfect),</span></div>
+                  <div class="formula-row"><span class="formula-type">➔</span> <span class="formula-code">would have + V3</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Контекст применения</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">сожаления</span>
+                    <span class="marker-tag">прошлые ошибки</span>
+                    <span class="marker-tag">исторические факты</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">If I had studied harder, I would have passed the test.</span>
+                      <span class="example-ru">Если бы я тогда лучше учился, я бы сдал тот тест.</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Частая ошибка:</strong> Ставить <em>«would have»</em> внутрь части <em>If</em>. Ошибка: «If I would have known». Правильно: <em>«If I had known»</em>.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 17. MIXED CONDITIONALS -->
+          <div class="grammar-card" data-category="conditionals" data-keywords="mixed conditionals смешанный тип прошлое настоящее">
+            <div class="grammar-header">
+              <div class="grammar-header-left">
+                <span class="tense-tag tag-conditional">Conditionals</span>
+                <div class="tense-title-wrap">
+                  <h3>Mixed Conditionals (Смешанный тип)</h3>
+                  <span class="tense-subtitle">Связка прошлого условия и результата в настоящем (или наоборот)</span>
+                </div>
+              </div>
+              <div class="grammar-header-right">
+                <span class="quick-formula">Past Perfect + would V1</span>
+                <div class="chevron-icon">▼</div>
+              </div>
+            </div>
+            <div class="grammar-body">
+              <div class="grammar-content">
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">📐 Типичная связка (Прошлое ➔ Сейчас)</div>
+                  <div class="formula-row"><span class="formula-type">If</span> <span class="formula-code">had + V3 (действие в прошлом),</span></div>
+                  <div class="formula-row"><span class="formula-type">➔</span> <span class="formula-code">would + V1 (результат сейчас)</span></div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-pink">⏰ Маркеры времени</div>
+                  <div class="marker-tags">
+                    <span class="marker-tag">yesterday ... now</span>
+                    <span class="marker-tag">in the past ... today</span>
+                  </div>
+                </div>
+
+                <div class="detail-box">
+                  <div class="detail-box-title accent-blue">💬 Примеры с переводом</div>
+                  <ul class="example-list">
+                    <li class="example-item">
+                      <span class="example-en">If I had taken the map yesterday, I wouldn't be lost now.</span>
+                      <span class="example-ru">Если бы я вчера взял карту (прошлое), я бы не блуждал сейчас (настоящее).</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="warning-box">
+                  ⚠️ <strong>Супер-фишка:</strong> Смешанный тип показывает высочайший уровень владения языком (C1–C2) на международных собеседованиях.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- /grammar-grid -->
+      </div>
+    </section>
+
+    <!-- SECTION: TESTS & KNOWLEDGE CHECK -->
+    <section class="section-wrap" style="background: linear-gradient(180deg, #f8fafc 0%, #fff5f7 50%, #f0f9ff 100%);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">Проверка знаний</span>
+          <h2 class="section-title">Закрепи правила и узнай свой уровень</h2>
+          <p class="section-subtitle">
+            Пройдите быстрый мини-тренажер по грамматике с моментальным разбором или полноценный тест на определение уровня от A1 до C2.
+          </p>
+        </div>
+
+        <div class="tests-grid">
+
+          <!-- 1. INTERACTIVE MINI-QUIZ -->
+          <div class="test-card" id="mini-quiz">
+            <span class="test-badge badge-pink">Мгновенный тренажер</span>
+            <h3 class="test-card-title">Мини-тест по временам</h3>
+            <p class="test-card-desc">Выберите правильный вариант ответа и сразу получите объяснение правила.</p>
+
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="quizProgressBar"></div>
+            </div>
+
+            <div id="quizContainer">
+              <div class="question-box">
+                <div class="question-number" id="quizQuestionNum">Вопрос 1 из 5</div>
+                <div class="question-text" id="quizQuestionText">...</div>
+              </div>
+
+              <div class="options-list" id="quizOptionsList"></div>
+
+              <div class="feedback-box" id="quizFeedback"></div>
+
+              <button class="btn btn-gradient btn-sm" id="quizNextBtn" style="display:none; width:100%;">
+                Следующий вопрос →
+              </button>
+            </div>
+
+            <!-- Quiz Result -->
+            <div class="result-container" id="quizResult">
+              <div style="font-size:3rem; margin-bottom:0.5rem;">🎉</div>
+              <div class="result-level-badge" id="quizScoreText">5 / 5</div>
+              <h4 class="result-level-title">Отличный результат!</h4>
+              <p class="result-level-desc" id="quizScoreDesc">
+                Вы отлично ориентируетесь во временах английского языка. Готовы проверить свой уровень целиком?
+              </p>
+              <button class="btn btn-outline btn-sm" id="quizRestartBtn">Пройти заново</button>
+            </div>
+          </div>
+
+          <!-- 2. PLACEMENT TEST (A1 - C2) -->
+          <div class="test-card" id="level-test">
+            <span class="test-badge badge-blue">Диагностика школы</span>
+            <h3 class="test-card-title">Тест уровня (A1 – C2)</h3>
+            <p class="test-card-desc">8 калиброванных вопросов разной сложности для точного определения текущей ступени.</p>
+
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="levelProgressBar"></div>
+            </div>
+
+            <div id="levelContainer">
+              <div class="question-box">
+                <div class="question-number" id="levelQuestionNum">Вопрос 1 из 8</div>
+                <div class="question-text" id="levelQuestionText">...</div>
+              </div>
+
+              <div class="options-list" id="levelOptionsList"></div>
+
+              <button class="btn btn-gradient btn-sm" id="levelNextBtn" style="display:none; width:100%;">
+                Далее →
+              </button>
+            </div>
+
+            <!-- Level Result -->
+            <div class="result-container" id="levelResult">
+              <div style="font-size:3.2rem; margin-bottom:0.5rem;">🌟</div>
+              <div class="result-level-badge" id="levelBadgeText">B2</div>
+              <h4 class="result-level-title" id="levelTitleText">Upper-Intermediate</h4>
+              <p class="result-level-desc" id="levelDescText">
+                Вы уверенно общаетесь на большинство тем, но хотите довести беглость речи и сложные конструкции до совершенства.
+              </p>
+              <a href="#apply" class="btn btn-gradient btn-sm" id="levelCtaBtn">
+                Записаться на курс по вашему уровню
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: LEAD CAPTURE FORM -->
+    <section id="apply" class="section-wrap">
+      <div class="container">
+        <div class="lead-section">
+          <div class="lead-grid">
+            <div class="lead-info">
+              <span class="section-tag">Бесплатный старт</span>
+              <h2>Запишитесь на вводный урок в LinguaVibe</h2>
+              <p>
+                Попробуйте интерактивную методику: преподаватель протестирует вашу устную речь, разберет ваши цели и составит личный план обучения за 30 минут.
+              </p>
+
+              <ul class="lead-perks">
+                <li class="perk-item">
+                  <span class="perk-check">✓</span>
+                  <span>Индивидуальный разбор вашего уровня</span>
+                </li>
+                <li class="perk-item">
+                  <span class="perk-check">✓</span>
+                  <span>Доступ к интерактивной платформе на 7 дней</span>
+                </li>
+                <li class="perk-item">
+                  <span class="perk-check">✓</span>
+                  <span>Гайд «Все времена английского без зубрежки» в подарок</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="lead-form-wrap">
+              <form id="leadForm" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="userName">Ваше имя *</label>
+                  <input type="text" id="userName" class="form-input" placeholder="Например, Софья" required>
+                  <div class="error-hint" id="nameError">Пожалуйста, укажите имя (минимум 2 буквы)</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="userContact">Телефон или Telegram *</label>
+                  <input type="text" id="userContact" class="form-input" placeholder="+7 (999) 000-00-00 или @username" required>
+                  <div class="error-hint" id="contactError">Введите корректный номер или Telegram-логин</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="userGoal">Ваша цель изучения</label>
+                  <select id="userGoal" class="form-select">
+                    <option value="speaking">Разговорный английский и преодоление барьера</option>
+                    <option value="career">Для работы / IT / международной карьеры</option>
+                    <option value="travel">Для путешествий и комфортной жизни за границей</option>
+                    <option value="exams">Подготовка к IELTS / TOEFL / ОГЭ / ЕГЭ</option>
+                    <option value="beginner">Английский с полного нуля</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="userLevelSelect">Предполагаемый уровень</label>
+                  <select id="userLevelSelect" class="form-select">
+                    <option value="unknown">Пока не знаю (нужен тест)</option>
+                    <option value="A1">A1 — Начальный (Beginner)</option>
+                    <option value="A2">A2 — Базовый (Elementary)</option>
+                    <option value="B1">B1 — Средний (Intermediate)</option>
+                    <option value="B2">B2 — Выше среднего (Upper-Intermediate)</option>
+                    <option value="C1">C1 — Продвинутый (Advanced)</option>
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-gradient" style="width:100%; margin-top:0.5rem;">
+                  Записаться на бесплатный урок →
+                </button>
+
+                <p class="form-agreement">
+                  Нажимая кнопку, вы соглашаетесь на обработку персональных данных. Никакого спама.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- SUCCESS POPUP MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="modalCloseBtn">&times;</button>
+      <div class="modal-icon">🎉</div>
+      <h3 class="modal-title">Заявка успешно отправлена!</h3>
+      <p class="modal-desc" id="modalMessage">
+        Спасибо за доверие! Куратор LinguaVibe свяжется с вами в Telegram или WhatsApp в течение 15 минут, чтобы подтвердить удобное время для вводного урока.
+      </p>
+      <button class="btn btn-gradient" id="modalOkBtn" style="width:100%;">Отлично, жду!</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="logo" style="margin-bottom:0.75rem;">
+            <div class="logo-icon">⚡</div>
+            <span>Lingua<span class="logo-gradient">Vibe</span></span>
+          </a>
+          <p class="footer-desc">
+            Онлайн-школа английского языка нового поколения. Учись в удовольствие с современными интерактивными инструментами.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Навигация</h5>
+          <ul class="footer-links">
+            <li><a href="#grammar" class="footer-link">Справочник грамматики</a></li>
+            <li><a href="#mini-quiz" class="footer-link">Тренажер времен</a></li>
+            <li><a href="#level-test" class="footer-link">Тест A1–C2</a></li>
+            <li><a href="#apply" class="footer-link">Запись на урок</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Контакты</h5>
+          <ul class="footer-links">
+            <li><span style="color:var(--text-muted);">Telegram: @linguavibe_school</span></li>
+            <li><span style="color:var(--text-muted);">Email: hello@linguavibe.com</span></li>
+            <li><span style="color:var(--text-muted);">Ежедневно с 09:00 до 21:00</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 LinguaVibe Online School. Все права защищены.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT LOGIC
+       ======================================================== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      /* ----------------------------------------------------
+         1. MOBILE NAVIGATION TOGGLE
+         ---------------------------------------------------- */
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const navLinks = document.getElementById('navLinks');
+      if (mobileBtn && navLinks) {
+        mobileBtn.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+        });
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => navLinks.classList.remove('active'));
+        });
+      }
+
+      /* ----------------------------------------------------
+         2. GRAMMAR ACCORDIONS & FILTER / SEARCH
+         ---------------------------------------------------- */
+      const grammarCards = document.querySelectorAll('.grammar-card');
+
+      grammarCards.forEach(card => {
+        const header = card.querySelector('.grammar-header');
+        header.addEventListener('click', () => {
+          const isOpen = card.classList.contains('open');
+          // Optionally close others or toggle current
+          card.classList.toggle('open', !isOpen);
+        });
+      });
+
+      // Filter pills
+      const pillBtns = document.querySelectorAll('.pill-btn');
+      const searchInput = document.getElementById('grammarSearch');
+
+      function filterGrammarCards() {
+        const activeFilter = document.querySelector('.pill-btn.active').dataset.filter;
+        const query = searchInput.value.trim().toLowerCase();
+
+        grammarCards.forEach(card => {
+          const category = card.dataset.category;
+          const keywords = (card.dataset.keywords || '').toLowerCase();
+          const title = card.querySelector('.tense-title-wrap h3').textContent.toLowerCase();
+
+          const matchesCategory = (activeFilter === 'all') || (category === activeFilter);
+          const matchesSearch = !query || title.includes(query) || keywords.includes(query);
+
+          if (matchesCategory && matchesSearch) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+
+      pillBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          pillBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          filterGrammarCards();
+        });
+      });
+
+      if (searchInput) {
+        searchInput.addEventListener('input', filterGrammarCards);
+      }
+
+      /* ----------------------------------------------------
+         3. INTERACTIVE MINI-QUIZ (GRAMMAR PRACTICE)
+         ---------------------------------------------------- */
+      const miniQuizData = [
+        {
+          question: "She ___ coffee every morning before going to work.",
+          options: ["drinks", "is drinking", "drink", "has drunk"],
+          correct: 0,
+          explanation: "Правильно: «drinks» (Present Simple). Окончание -s требуется для 3-го лица ед. числа (She) при регулярном действии (every morning)."
+        },
+        {
+          question: "Look at the dark clouds! It ___ rain very soon.",
+          options: ["is going to", "was raining", "had rained", "rain"],
+          correct: 0,
+          explanation: "Правильно: «is going to». Конструкция «be going to» выражает прогноз на основе очевидных визуальных признаков прямо сейчас."
+        },
+        {
+          question: "When we arrived at the cinema, the movie ___ already ___.",
+          options: ["had / started", "has / started", "started / already", "will / start"],
+          correct: 0,
+          explanation: "Правильно: «had already started» (Past Perfect). Фильм начался раньше, чем мы прибыли в кинотеатр (действие перед действием в прошлом)."
+        },
+        {
+          question: "If I ___ a million dollars right now, I would travel the world.",
+          options: ["had", "have", "would have", "had had"],
+          correct: 0,
+          explanation: "Правильно: «had» (Second Conditional). Для нереального условия в настоящем используется If + Past Simple, а в следствии — would + V1."
+        },
+        {
+          question: "If you ___ me yesterday, I would have helped you.",
+          options: ["had asked", "asked", "would ask", "have asked"],
+          correct: 0,
+          explanation: "Правильно: «had asked» (Third Conditional). Нереальное условие в прошлом строится по схеме: If + Past Perfect, would have + V3."
+        }
+      ];
+
+      let currentQuizIndex = 0;
+      let quizScore = 0;
+      let quizAnswered = false;
+
+      const quizQuestionNum = document.getElementById('quizQuestionNum');
+      const quizQuestionText = document.getElementById('quizQuestionText');
+      const quizOptionsList = document.getElementById('quizOptionsList');
+      const quizFeedback = document.getElementById('quizFeedback');
+      const quizNextBtn = document.getElementById('quizNextBtn');
+      const quizProgressBar = document.getElementById('quizProgressBar');
+      const quizContainer = document.getElementById('quizContainer');
+      const quizResult = document.getElementById('quizResult');
+      const quizScoreText = document.getElementById('quizScoreText');
+      const quizRestartBtn = document.getElementById('quizRestartBtn');
+
+      function loadQuizQuestion(index) {
+        quizAnswered = false;
+        const q = miniQuizData[index];
+        quizQuestionNum.textContent = `Вопрос ${index + 1} из ${miniQuizData.length}`;
+        quizQuestionText.textContent = q.question;
+        quizProgressBar.style.width = `${((index) / miniQuizData.length) * 100}%`;
+        quizFeedback.className = 'feedback-box';
+        quizFeedback.style.display = 'none';
+        quizNextBtn.style.display = 'none';
+
+        quizOptionsList.innerHTML = '';
+        q.options.forEach((opt, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.innerHTML = `<span>${opt}</span><span style="font-size:0.85rem; opacity:0.6;">[${String.fromCharCode(65 + idx)}]</span>`;
+          btn.addEventListener('click', () => handleQuizAnswer(idx, btn));
+          quizOptionsList.appendChild(btn);
+        });
+      }
+
+      function handleQuizAnswer(selectedIndex, clickedBtn) {
+        if (quizAnswered) return;
+        quizAnswered = true;
+
+        const q = miniQuizData[currentQuizIndex];
+        const allBtns = quizOptionsList.querySelectorAll('.option-btn');
+
+        allBtns.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === q.correct) {
+            btn.classList.add('correct');
+          }
+        });
+
+        if (selectedIndex === q.correct) {
+          quizScore++;
+          clickedBtn.classList.add('correct');
+          quizFeedback.textContent = `🎉 Верно! ${q.explanation}`;
+          quizFeedback.className = 'feedback-box show success';
+        } else {
+          clickedBtn.classList.add('incorrect');
+          quizFeedback.textContent = `❌ Не совсем так. ${q.explanation}`;
+          quizFeedback.className = 'feedback-box show error';
+        }
+
+        quizNextBtn.style.display = 'block';
+      }
+
+      quizNextBtn.addEventListener('click', () => {
+        currentQuizIndex++;
+        if (currentQuizIndex < miniQuizData.length) {
+          loadQuizQuestion(currentQuizIndex);
+        } else {
+          showQuizResults();
+        }
+      });
+
+      function showQuizResults() {
+        quizProgressBar.style.width = '100%';
+        quizContainer.style.display = 'none';
+        quizResult.style.display = 'block';
+        quizScoreText.textContent = `${quizScore} / ${miniQuizData.length}`;
+      }
+
+      quizRestartBtn.addEventListener('click', () => {
+        currentQuizIndex = 0;
+        quizScore = 0;
+        quizContainer.style.display = 'block';
+        quizResult.style.display = 'none';
+        loadQuizQuestion(0);
+      });
+
+      loadQuizQuestion(0);
+
+      /* ----------------------------------------------------
+         4. PLACEMENT LEVEL TEST (A1 TO C2)
+         ---------------------------------------------------- */
+      const levelQuestions = [
+        {
+          q: "Where ___ you from?",
+          opts: ["are", "is", "do", "have"],
+          correct: 0,
+          weight: "A1"
+        },
+        {
+          q: "I haven't seen Sarah ___ last Monday.",
+          opts: ["since", "for", "from", "ago"],
+          correct: 0,
+          weight: "A2"
+        },
+        {
+          q: "If it ___ sunny tomorrow, we will go for a walk.",
+          opts: ["is", "will be", "was", "has been"],
+          correct: 0,
+          weight: "B1"
+        },
+        {
+          q: "She is accustomed to ___ up at 6 AM every day.",
+          opts: ["waking", "wake", "woke", "have woken"],
+          correct: 0,
+          weight: "B1+"
+        },
+        {
+          q: "I would rather you ___ speak to him in that tone.",
+          opts: ["didn't", "won't", "don't", "shouldn't"],
+          correct: 0,
+          weight: "B2"
+        },
+        {
+          q: "Scarcely ___ entered the hall when the lecture started.",
+          opts: ["had he", "he had", "did he", "was he"],
+          correct: 0,
+          weight: "B2+"
+        },
+        {
+          q: "The plan was rejected on the ___ that it lacked financial backing.",
+          opts: ["grounds", "terms", "criteria", "reasons"],
+          correct: 0,
+          weight: "C1"
+        },
+        {
+          q: "Her subtle nuance in speech ___ all but the most astute listeners.",
+          opts: ["eluded", "evaporated", "dissolved", "relinquished"],
+          correct: 0,
+          weight: "C2"
+        }
+      ];
+
+      let levelCurrentIndex = 0;
+      let levelScore = 0;
+      let levelAnswerSelected = -1;
+
+      const levelQuestionNum = document.getElementById('levelQuestionNum');
+      const levelQuestionText = document.getElementById('levelQuestionText');
+      const levelOptionsList = document.getElementById('levelOptionsList');
+      const levelNextBtn = document.getElementById('levelNextBtn');
+      const levelProgressBar = document.getElementById('levelProgressBar');
+      const levelContainer = document.getElementById('levelContainer');
+      const levelResult = document.getElementById('levelResult');
+      const levelBadgeText = document.getElementById('levelBadgeText');
+      const levelTitleText = document.getElementById('levelTitleText');
+      const levelDescText = document.getElementById('levelDescText');
+      const levelCtaBtn = document.getElementById('levelCtaBtn');
+
+      function loadLevelQuestion(index) {
+        levelAnswerSelected = -1;
+        const q = levelQuestions[index];
+        levelQuestionNum.textContent = `Вопрос ${index + 1} из ${levelQuestions.length}`;
+        levelQuestionText.textContent = q.q;
+        levelProgressBar.style.width = `${((index) / levelQuestions.length) * 100}%`;
+        levelNextBtn.style.display = 'none';
+
+        levelOptionsList.innerHTML = '';
+        q.opts.forEach((opt, idx) => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.textContent = opt;
+          btn.addEventListener('click', () => {
+            levelOptionsList.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            levelAnswerSelected = idx;
+            levelNextBtn.style.display = 'block';
+          });
+          levelOptionsList.appendChild(btn);
+        });
+      }
+
+      levelNextBtn.addEventListener('click', () => {
+        if (levelAnswerSelected === -1) return;
+        if (levelAnswerSelected === levelQuestions[levelCurrentIndex].correct) {
+          levelScore++;
+        }
+        levelCurrentIndex++;
+        if (levelCurrentIndex < levelQuestions.length) {
+          loadLevelQuestion(levelCurrentIndex);
+        } else {
+          showLevelResults();
+        }
+      });
+
+      function showLevelResults() {
+        levelProgressBar.style.width = '100%';
+        levelContainer.style.display = 'none';
+        levelResult.style.display = 'block';
+
+        let badge = "A1";
+        let title = "Beginner (Начальный)";
+        let desc = "Вы только начинаете погружение в английский! На вводном уроке преподаватель покажет базовые конструкции и поможет заговорить с первого дня.";
+
+        if (levelScore >= 8) {
+          badge = "C2";
+          title = "Proficiency (Носитель языка)";
+          desc = "Великолепный уровень! Вы тонко чувствуете нюансы языка, идиомы и сложные стилистические фигуры.";
+        } else if (levelScore >= 7) {
+          badge = "C1";
+          title = "Advanced (Продвинутый)";
+          desc = "Вы свободно владеете языком в академической и профессиональной среде. Сфокусируемся на беглости и идиоматике!";
+        } else if (levelScore >= 5) {
+          badge = "B2";
+          title = "Upper-Intermediate (Выше среднего)";
+          desc = "Вы отлично ориентируетесь в грамматике и легко общаетесь. Мы поможем отшлифовать сложные конструкции и сдать международные экзамены.";
+        } else if (levelScore >= 3) {
+          badge = "B1";
+          title = "Intermediate (Средний)";
+          desc = "Хорошая база! Вы понимаете основную суть речи, но иногда спотыкаетесь на сложных временах. Наш разговорный трек быстро это исправит.";
+        } else if (levelScore >= 2) {
+          badge = "A2";
+          title = "Elementary (Элементарный)";
+          desc = "Вы знаете базовые слова и фразы. Самое время систематизировать времена и начать строить полноценные диалоги!";
+        }
+
+        levelBadgeText.textContent = badge;
+        levelTitleText.textContent = title;
+        levelDescText.textContent = desc;
+
+        // Auto-select in form
+        const userLevelSelect = document.getElementById('userLevelSelect');
+        if (userLevelSelect) {
+          const matchOpt = Array.from(userLevelSelect.options).find(opt => opt.value === badge.slice(0, 2));
+          if (matchOpt) userLevelSelect.value = matchOpt.value;
+        }
+      }
+
+      loadLevelQuestion(0);
+
+      /* ----------------------------------------------------
+         5. LEAD FORM VALIDATION & MODAL SUCCESS
+         ---------------------------------------------------- */
+      const leadForm = document.getElementById('leadForm');
+      const userName = document.getElementById('userName');
+      const userContact = document.getElementById('userContact');
+      const nameError = document.getElementById('nameError');
+      const contactError = document.getElementById('contactError');
+      const successModal = document.getElementById('successModal');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const modalOkBtn = document.getElementById('modalOkBtn');
+
+      function validateName() {
+        const val = userName.value.trim();
+        if (val.length < 2) {
+          userName.classList.add('error');
+          nameError.style.display = 'block';
+          return false;
+        }
+        userName.classList.remove('error');
+        nameError.style.display = 'none';
+        return true;
+      }
+
+      function validateContact() {
+        const val = userContact.value.trim();
+        // Check phone or telegram username
+        if (val.length < 4) {
+          userContact.classList.add('error');
+          contactError.style.display = 'block';
+          return false;
+        }
+        userContact.classList.remove('error');
+        contactError.style.display = 'none';
+        return true;
+      }
+
+      userName.addEventListener('input', validateName);
+      userContact.addEventListener('input', validateContact);
+
+      leadForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const isNameValid = validateName();
+        const isContactValid = validateContact();
+
+        if (isNameValid && isContactValid) {
+          const nameVal = userName.value.trim();
+          const modalMsg = document.getElementById('modalMessage');
+          if (modalMsg) {
+            modalMsg.textContent = `${nameVal}, ваша заявка принята! Куратор LinguaVibe напишет вам в течение 15 минут, согласует удобное время и вышлет персональный доступ к вводному уроку.`;
+          }
+
+          successModal.classList.add('active');
+          leadForm.reset();
+        }
+      });
+
+      function closeModal() {
+        successModal.classList.remove('active');
+      }
+
+      modalCloseBtn.addEventListener('click', closeModal);
+      modalOkBtn.addEventListener('click', closeModal);
+      successModal.addEventListener('click', (e) => {
+        if (e.target === successModal) closeModal();
+      });
+
+    });
+  </script>
+</body>
+</html>
